@@ -9,29 +9,29 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 min-h-screen">
+<body class="bg-black min-h-screen">
   <div id="app" class="container mx-auto p-6 max-w-7xl">
     <!-- Loading State -->
     <div id="loading" class="flex items-center justify-center min-h-screen">
       <div class="text-center">
-        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-        <p class="text-xl text-gray-700">Loading...</p>
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+        <p class="text-xl text-gray-400">Loading...</p>
       </div>
     </div>
 
     <!-- Main App (hidden initially) -->
     <div id="mainApp" class="hidden">
       <!-- Database Status Banner -->
-      <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-2xl shadow-xl p-4 mb-6 border border-slate-700">
+      <div class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white rounded-2xl shadow-2xl p-4 mb-6 border border-cyan-500/30">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <i data-lucide="database" class="w-6 h-6"></i>
+            <i data-lucide="database" class="w-6 h-6 text-cyan-400"></i>
             <div>
-              <div class="font-bold">🌐 Connected to Database</div>
-              <div class="text-sm opacity-90">Real-time synchronization active</div>
+              <div class="font-bold text-cyan-400">🌐 Connected to Database</div>
+              <div class="text-sm text-gray-400">Real-time synchronization active</div>
             </div>
           </div>
-          <button onclick="loadEstimates()" class="bg-white text-slate-800 px-4 py-2 rounded-lg hover:bg-slate-100 transition font-medium shadow-md">
+          <button onclick="loadEstimates()" class="bg-cyan-500 text-black px-4 py-2 rounded-lg hover:bg-cyan-400 transition font-medium shadow-lg">
             <i data-lucide="refresh-cw" class="w-4 h-4 inline mr-2"></i>
             Refresh
           </button>
@@ -39,18 +39,18 @@
       </div>
 
       <!-- Header -->
-      <div class="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-200">
+      <div class="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-6 mb-6 border border-gray-800">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-2">Tour Estimate Management</h1>
-            <p class="text-slate-600">Track and analyze your tour estimates with precision</p>
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-2">Tour Estimate Management</h1>
+            <p class="text-gray-400">Track and analyze your tour estimates with precision</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="addEstimate()" class="bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-900 transition shadow-md">
+            <button onclick="addEstimate()" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-lg hover:from-cyan-400 hover:to-blue-400 transition shadow-lg">
               <i data-lucide="plus" class="w-5 h-5 inline mr-2"></i>
               Add New
             </button>
-            <button onclick="exportToCSV()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition shadow-md">
+            <button onclick="exportToCSV()" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-lg hover:from-emerald-400 hover:to-teal-400 transition shadow-lg">
               <i data-lucide="download" class="w-5 h-5 inline mr-2"></i>
               Export CSV
             </button>
@@ -59,10 +59,10 @@
 
         <!-- View Switcher -->
         <div class="flex gap-2 mb-4">
-          <button onclick="switchView('table')" id="btnTableView" class="px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md">
+          <button onclick="switchView('table')" id="btnTableView" class="px-4 py-2 rounded-lg transition bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg">
             Table View
           </button>
-          <button onclick="switchView('analytics')" id="btnAnalyticsView" class="px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200">
+          <button onclick="switchView('analytics')" id="btnAnalyticsView" class="px-4 py-2 rounded-lg transition bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700">
             Analytics View
           </button>
         </div>
@@ -76,9 +76,9 @@
       <!-- Table View -->
       <div id="tableView">
         <!-- Filters -->
-        <div class="bg-white rounded-2xl shadow-xl p-4 mb-6 border border-slate-200">
+        <div class="bg-gray-900 rounded-2xl shadow-2xl p-4 mb-6 border border-gray-800">
           <div class="flex flex-wrap gap-4">
-            <select id="filterCountry" onchange="applyFilters()" class="border border-slate-300 rounded-lg px-4 py-2 bg-white text-slate-700 focus:ring-2 focus:ring-slate-400 focus:border-transparent">
+            <select id="filterCountry" onchange="applyFilters()" class="border border-gray-700 rounded-lg px-4 py-2 bg-gray-800 text-gray-200 focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
               <option value="All">Country: All</option>
               <option value="Taiwan">Taiwan</option>
               <option value="Singapore">Singapore</option>
@@ -92,7 +92,7 @@
               <option value="Philippines">Philippines</option>
               <option value="Europe">Europe</option>
             </select>
-            <select id="filterStatus" onchange="applyFilters()" class="border border-slate-300 rounded-lg px-4 py-2 bg-white text-slate-700 focus:ring-2 focus:ring-slate-400 focus:border-transparent">
+            <select id="filterStatus" onchange="applyFilters()" class="border border-gray-700 rounded-lg px-4 py-2 bg-gray-800 text-gray-200 focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
               <option value="All">Status: All</option>
               <option value="Estimating">Estimating</option>
               <option value="Under Review">Under Review</option>
@@ -104,10 +104,10 @@
         </div>
 
         <!-- Table -->
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
+        <div class="bg-gray-900 rounded-2xl shadow-2xl overflow-hidden border border-gray-800">
           <div class="overflow-x-auto">
             <table class="w-full">
-              <thead class="bg-gradient-to-r from-slate-800 to-slate-700 text-white">
+              <thead class="bg-gradient-to-r from-gray-800 to-gray-900 text-cyan-400">
                 <tr>
                   <th class="px-4 py-3 text-left text-sm font-semibold">Date</th>
                   <th class="px-4 py-3 text-left text-sm font-semibold">Country</th>
@@ -133,9 +133,9 @@
         <!-- Charts Row 1 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Country Distribution -->
-          <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
-            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <i data-lucide="pie-chart" class="w-6 h-6 text-slate-700"></i>
+          <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 border border-gray-800">
+            <h3 class="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-6 h-6 text-cyan-400"></i>
               Estimates by Country
             </h3>
             <div class="h-80">
@@ -144,9 +144,9 @@
           </div>
 
           <!-- Status Distribution -->
-          <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
-            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <i data-lucide="bar-chart-3" class="w-6 h-6 text-emerald-600"></i>
+          <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 border border-gray-800">
+            <h3 class="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
+              <i data-lucide="bar-chart-3" class="w-6 h-6 text-emerald-400"></i>
               Estimates by Status
             </h3>
             <div class="h-80">
@@ -156,9 +156,9 @@
         </div>
 
         <!-- Monthly Trend -->
-        <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
-          <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-            <i data-lucide="trending-up" class="w-6 h-6 text-indigo-600"></i>
+        <div class="bg-gray-900 rounded-2xl shadow-2xl p-6 border border-gray-800">
+          <h3 class="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
+            <i data-lucide="trending-up" class="w-6 h-6 text-blue-400"></i>
             Monthly Trend Analysis
           </h3>
           <div class="h-96">
@@ -214,13 +214,13 @@
       if (currentView === 'table') {
         document.getElementById('tableView').classList.remove('hidden');
         document.getElementById('analyticsView').classList.add('hidden');
-        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md';
-        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200';
+        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg';
+        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700';
       } else {
         document.getElementById('tableView').classList.add('hidden');
         document.getElementById('analyticsView').classList.remove('hidden');
-        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200';
-        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md';
+        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700';
+        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg';
         updateCharts();
       }
     }
@@ -406,10 +406,10 @@
 
     function getStatusColor(status) {
       switch(status) {
-        case 'Won': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
-        case 'Lost': return 'bg-rose-50 text-rose-700 border-rose-200';
-        case 'Under Review': return 'bg-amber-50 text-amber-700 border-amber-200';
-        default: return 'bg-slate-50 text-slate-700 border-slate-200';
+        case 'Won': return 'bg-emerald-900/50 text-emerald-400 border-emerald-700';
+        case 'Lost': return 'bg-rose-900/50 text-rose-400 border-rose-700';
+        case 'Under Review': return 'bg-amber-900/50 text-amber-400 border-amber-700';
+        default: return 'bg-gray-800 text-gray-400 border-gray-700';
       }
     }
 
@@ -421,23 +421,23 @@
       const winRate = total > 0 ? ((won / total) * 100).toFixed(1) : 0;
       
       document.getElementById('statsCards').innerHTML = `
-        <div class="bg-gradient-to-br from-slate-700 to-slate-800 text-white p-4 rounded-xl shadow-lg border border-slate-600">
+        <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white p-4 rounded-xl shadow-2xl border border-cyan-400/30">
           <div class="text-sm opacity-90">Total Estimates</div>
           <div class="text-3xl font-bold">${total}</div>
         </div>
-        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-4 rounded-xl shadow-lg">
+        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-4 rounded-xl shadow-2xl border border-emerald-400/30">
           <div class="text-sm opacity-90">Won</div>
           <div class="text-3xl font-bold">${won}</div>
         </div>
-        <div class="bg-gradient-to-br from-rose-500 to-rose-600 text-white p-4 rounded-xl shadow-lg">
+        <div class="bg-gradient-to-br from-rose-500 to-pink-600 text-white p-4 rounded-xl shadow-2xl border border-rose-400/30">
           <div class="text-sm opacity-90">Lost</div>
           <div class="text-3xl font-bold">${lost}</div>
         </div>
-        <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-4 rounded-xl shadow-lg">
+        <div class="bg-gradient-to-br from-amber-500 to-orange-600 text-white p-4 rounded-xl shadow-2xl border border-amber-400/30">
           <div class="text-sm opacity-90">Pending</div>
           <div class="text-3xl font-bold">${pending}</div>
         </div>
-        <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-4 rounded-xl shadow-lg">
+        <div class="bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-xl shadow-2xl border border-purple-400/30">
           <div class="text-sm opacity-90">Win Rate</div>
           <div class="text-3xl font-bold">${winRate}%</div>
         </div>
@@ -485,9 +485,11 @@
         datasets: [{
           data: Object.values(countryData),
           backgroundColor: [
-            '#475569', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
-            '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1', '#14b8a6'
-          ]
+            '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
+            '#ec4899', '#84cc16', '#f97316', '#6366f1', '#14b8a6', '#3b82f6'
+          ],
+          borderColor: '#1f2937',
+          borderWidth: 2
         }]
       };
       
@@ -506,7 +508,14 @@
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              position: 'bottom'
+              position: 'bottom',
+              labels: {
+                color: '#9ca3af',
+                padding: 15,
+                font: {
+                  size: 12
+                }
+              }
             }
           }
         }
@@ -528,7 +537,9 @@
         datasets: [{
           label: 'Number of Estimates',
           data: Object.values(statusData),
-          backgroundColor: '#10b981'
+          backgroundColor: '#10b981',
+          borderColor: '#059669',
+          borderWidth: 2
         }]
       };
       
@@ -554,7 +565,19 @@
             y: {
               beginAtZero: true,
               ticks: {
-                stepSize: 1
+                stepSize: 1,
+                color: '#9ca3af'
+              },
+              grid: {
+                color: '#374151'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#9ca3af'
+              },
+              grid: {
+                color: '#374151'
               }
             }
           }
@@ -586,23 +609,26 @@
           {
             label: 'Total',
             data: sortedMonths.map(m => monthlyData[m].total),
-            borderColor: '#475569',
-            backgroundColor: 'rgba(71, 85, 105, 0.1)',
-            tension: 0.4
+            borderColor: '#06b6d4',
+            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            tension: 0.4,
+            borderWidth: 2
           },
           {
             label: 'Won',
             data: sortedMonths.map(m => monthlyData[m].won),
             borderColor: '#10b981',
             backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            tension: 0.4
+            tension: 0.4,
+            borderWidth: 2
           },
           {
             label: 'Lost',
             data: sortedMonths.map(m => monthlyData[m].lost),
             borderColor: '#ef4444',
             backgroundColor: 'rgba(239, 68, 68, 0.1)',
-            tension: 0.4
+            tension: 0.4,
+            borderWidth: 2
           }
         ]
       };
@@ -622,14 +648,33 @@
           maintainAspectRatio: false,
           plugins: {
             legend: {
-              position: 'bottom'
+              position: 'bottom',
+              labels: {
+                color: '#9ca3af',
+                padding: 15,
+                font: {
+                  size: 12
+                }
+              }
             }
           },
           scales: {
             y: {
               beginAtZero: true,
               ticks: {
-                stepSize: 1
+                stepSize: 1,
+                color: '#9ca3af'
+              },
+              grid: {
+                color: '#374151'
+              }
+            },
+            x: {
+              ticks: {
+                color: '#9ca3af'
+              },
+              grid: {
+                color: '#374151'
               }
             }
           }
