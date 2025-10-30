@@ -421,25 +421,69 @@
       const winRate = total > 0 ? ((won / total) * 100).toFixed(1) : 0;
       
       document.getElementById('statsCards').innerHTML = `
-        <div class="bg-gradient-to-br from-cyan-500 to-blue-600 text-white p-4 rounded-xl shadow-2xl border border-cyan-400/30">
-          <div class="text-sm opacity-90">Total Estimates</div>
-          <div class="text-3xl font-bold">${total}</div>
+        <div class="bg-gray-900 p-5 rounded-xl shadow-xl border border-gray-800 hover:border-gray-700 transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Total Estimates</div>
+            <div class="w-8 h-8 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gray-750 transition">
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-white mb-1">${total}</div>
+          <div class="text-xs text-gray-600">All time</div>
         </div>
-        <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-4 rounded-xl shadow-2xl border border-emerald-400/30">
-          <div class="text-sm opacity-90">Won</div>
-          <div class="text-3xl font-bold">${won}</div>
+        
+        <div class="bg-gray-900 p-5 rounded-xl shadow-xl border border-gray-800 hover:border-emerald-900/50 transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Won</div>
+            <div class="w-8 h-8 rounded-lg bg-emerald-950/30 flex items-center justify-center group-hover:bg-emerald-950/50 transition">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-white mb-1">${won}</div>
+          <div class="text-xs text-emerald-500/70">+${won} closed</div>
         </div>
-        <div class="bg-gradient-to-br from-rose-500 to-pink-600 text-white p-4 rounded-xl shadow-2xl border border-rose-400/30">
-          <div class="text-sm opacity-90">Lost</div>
-          <div class="text-3xl font-bold">${lost}</div>
+        
+        <div class="bg-gray-900 p-5 rounded-xl shadow-xl border border-gray-800 hover:border-rose-900/50 transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Lost</div>
+            <div class="w-8 h-8 rounded-lg bg-rose-950/30 flex items-center justify-center group-hover:bg-rose-950/50 transition">
+              <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-white mb-1">${lost}</div>
+          <div class="text-xs text-rose-500/70">${lost} declined</div>
         </div>
-        <div class="bg-gradient-to-br from-amber-500 to-orange-600 text-white p-4 rounded-xl shadow-2xl border border-amber-400/30">
-          <div class="text-sm opacity-90">Pending</div>
-          <div class="text-3xl font-bold">${pending}</div>
+        
+        <div class="bg-gray-900 p-5 rounded-xl shadow-xl border border-gray-800 hover:border-amber-900/50 transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Pending</div>
+            <div class="w-8 h-8 rounded-lg bg-amber-950/30 flex items-center justify-center group-hover:bg-amber-950/50 transition">
+              <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-white mb-1">${pending}</div>
+          <div class="text-xs text-amber-500/70">In progress</div>
         </div>
-        <div class="bg-gradient-to-br from-purple-500 to-indigo-600 text-white p-4 rounded-xl shadow-2xl border border-purple-400/30">
-          <div class="text-sm opacity-90">Win Rate</div>
-          <div class="text-3xl font-bold">${winRate}%</div>
+        
+        <div class="bg-gray-900 p-5 rounded-xl shadow-xl border border-gray-800 hover:border-cyan-900/50 transition-all group">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Win Rate</div>
+            <div class="w-8 h-8 rounded-lg bg-cyan-950/30 flex items-center justify-center group-hover:bg-cyan-950/50 transition">
+              <svg class="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-white mb-1">${winRate}%</div>
+          <div class="text-xs text-cyan-500/70">Conversion rate</div>
         </div>
       `;
     }
