@@ -7,9 +7,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<body class="bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 min-h-screen">
   <div id="app" class="container mx-auto p-6 max-w-7xl">
     <!-- Loading State -->
     <div id="loading" class="flex items-center justify-center min-h-screen">
@@ -22,16 +22,16 @@
     <!-- Main App (hidden initially) -->
     <div id="mainApp" class="hidden">
       <!-- Database Status Banner -->
-      <div class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl shadow-lg p-4 mb-6">
+      <div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white rounded-2xl shadow-xl p-4 mb-6 border border-slate-700">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <i data-lucide="database" class="w-6 h-6"></i>
             <div>
-              <div class="font-bold">🌐 Connected to Supabase Database</div>
-              <div class="text-sm opacity-90">All changes are synced in real-time</div>
+              <div class="font-bold">🌐 Connected to Database</div>
+              <div class="text-sm opacity-90">Real-time synchronization active</div>
             </div>
           </div>
-          <button onclick="loadEstimates()" class="bg-white text-green-700 px-4 py-2 rounded-lg hover:bg-green-50 transition font-medium">
+          <button onclick="loadEstimates()" class="bg-white text-slate-800 px-4 py-2 rounded-lg hover:bg-slate-100 transition font-medium shadow-md">
             <i data-lucide="refresh-cw" class="w-4 h-4 inline mr-2"></i>
             Refresh
           </button>
@@ -39,18 +39,18 @@
       </div>
 
       <!-- Header -->
-      <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+      <div class="bg-white rounded-2xl shadow-xl p-6 mb-6 border border-slate-200">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <div>
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Tour Estimate Management</h1>
-            <p class="text-gray-600">Track and analyze your tour estimates</p>
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-2">Tour Estimate Management</h1>
+            <p class="text-slate-600">Track and analyze your tour estimates with precision</p>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="addEstimate()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-md">
+            <button onclick="addEstimate()" class="bg-slate-800 text-white px-4 py-2 rounded-lg hover:bg-slate-900 transition shadow-md">
               <i data-lucide="plus" class="w-5 h-5 inline mr-2"></i>
               Add New
             </button>
-            <button onclick="exportToCSV()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-md">
+            <button onclick="exportToCSV()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition shadow-md">
               <i data-lucide="download" class="w-5 h-5 inline mr-2"></i>
               Export CSV
             </button>
@@ -59,10 +59,10 @@
 
         <!-- View Switcher -->
         <div class="flex gap-2 mb-4">
-          <button onclick="switchView('table')" id="btnTableView" class="px-4 py-2 rounded-lg transition bg-blue-600 text-white">
+          <button onclick="switchView('table')" id="btnTableView" class="px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md">
             Table View
           </button>
-          <button onclick="switchView('analytics')" id="btnAnalyticsView" class="px-4 py-2 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-gray-300">
+          <button onclick="switchView('analytics')" id="btnAnalyticsView" class="px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200">
             Analytics View
           </button>
         </div>
@@ -76,17 +76,23 @@
       <!-- Table View -->
       <div id="tableView">
         <!-- Filters -->
-        <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
+        <div class="bg-white rounded-2xl shadow-xl p-4 mb-6 border border-slate-200">
           <div class="flex flex-wrap gap-4">
-            <select id="filterCountry" onchange="applyFilters()" class="border border-gray-300 rounded-lg px-4 py-2">
+            <select id="filterCountry" onchange="applyFilters()" class="border border-slate-300 rounded-lg px-4 py-2 bg-white text-slate-700 focus:ring-2 focus:ring-slate-400 focus:border-transparent">
               <option value="All">Country: All</option>
               <option value="Taiwan">Taiwan</option>
               <option value="Singapore">Singapore</option>
               <option value="Vietnam">Vietnam</option>
               <option value="Japan">Japan</option>
               <option value="Thailand">Thailand</option>
+              <option value="Latin America">Latin America</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Hong Kong">Hong Kong</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Europe">Europe</option>
             </select>
-            <select id="filterStatus" onchange="applyFilters()" class="border border-gray-300 rounded-lg px-4 py-2">
+            <select id="filterStatus" onchange="applyFilters()" class="border border-slate-300 rounded-lg px-4 py-2 bg-white text-slate-700 focus:ring-2 focus:ring-slate-400 focus:border-transparent">
               <option value="All">Status: All</option>
               <option value="Estimating">Estimating</option>
               <option value="Under Review">Under Review</option>
@@ -98,10 +104,10 @@
         </div>
 
         <!-- Table -->
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
           <div class="overflow-x-auto">
             <table class="w-full">
-              <thead class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+              <thead class="bg-gradient-to-r from-slate-800 to-slate-700 text-white">
                 <tr>
                   <th class="px-4 py-3 text-left text-sm font-semibold">Date</th>
                   <th class="px-4 py-3 text-left text-sm font-semibold">Country</th>
@@ -127,9 +133,9 @@
         <!-- Charts Row 1 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Country Distribution -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <i data-lucide="pie-chart" class="w-6 h-6 text-blue-600"></i>
+          <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <i data-lucide="pie-chart" class="w-6 h-6 text-slate-700"></i>
               Estimates by Country
             </h3>
             <div class="h-80">
@@ -138,9 +144,9 @@
           </div>
 
           <!-- Status Distribution -->
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-              <i data-lucide="bar-chart-3" class="w-6 h-6 text-green-600"></i>
+          <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
+            <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <i data-lucide="bar-chart-3" class="w-6 h-6 text-emerald-600"></i>
               Estimates by Status
             </h3>
             <div class="h-80">
@@ -150,9 +156,9 @@
         </div>
 
         <!-- Monthly Trend -->
-        <div class="bg-white rounded-xl shadow-lg p-6">
-          <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <i data-lucide="trending-up" class="w-6 h-6 text-purple-600"></i>
+        <div class="bg-white rounded-2xl shadow-xl p-6 border border-slate-200">
+          <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+            <i data-lucide="trending-up" class="w-6 h-6 text-indigo-600"></i>
             Monthly Trend Analysis
           </h3>
           <div class="h-96">
@@ -183,7 +189,7 @@
       trend: null
     };
     
-    const countries = ['Taiwan', 'Singapore', 'Vietnam', 'Japan', 'Thailand'];
+    const countries = ['Taiwan', 'Singapore', 'Vietnam', 'Japan', 'Thailand', 'Latin America', 'Malaysia', 'Indonesia', 'Hong Kong', 'Philippines', 'Europe'];
     const statuses = ['Estimating', 'Under Review', 'Won', 'Lost', 'On Hold'];
     const lostReasons = [
       'Pricing - Too expensive',
@@ -205,16 +211,16 @@
     function switchView(view) {
       currentView = view;
       
-      if (view === 'table') {
+      if (currentView === 'table') {
         document.getElementById('tableView').classList.remove('hidden');
         document.getElementById('analyticsView').classList.add('hidden');
-        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-blue-600 text-white';
-        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-gray-300';
+        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md';
+        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200';
       } else {
         document.getElementById('tableView').classList.add('hidden');
         document.getElementById('analyticsView').classList.remove('hidden');
-        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-gray-200 text-gray-700 hover:bg-gray-300';
-        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-blue-600 text-white';
+        document.getElementById('btnTableView').className = 'px-4 py-2 rounded-lg transition bg-slate-100 text-slate-700 hover:bg-slate-200';
+        document.getElementById('btnAnalyticsView').className = 'px-4 py-2 rounded-lg transition bg-slate-800 text-white shadow-md';
         updateCharts();
       }
     }
@@ -341,42 +347,42 @@
       }
       
       tbody.innerHTML = filteredEstimates.map(estimate => `
-        <tr class="border-b hover:bg-blue-50 transition">
+                      <tr class="border-b hover:bg-slate-50 transition">
           <td class="px-4 py-3">
             <input type="date" value="${estimate.date || ''}" 
               onchange="updateEstimate(${estimate.id}, 'date', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent">
           </td>
           <td class="px-4 py-3">
             <select onchange="updateEstimate(${estimate.id}, 'country', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent">
               ${countries.map(c => `<option value="${c}" ${estimate.country === c ? 'selected' : ''}>${c}</option>`).join('')}
             </select>
           </td>
           <td class="px-4 py-3">
             <input type="text" value="${estimate.client_name || ''}" 
               onchange="updateEstimate(${estimate.id}, 'client_name', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full" placeholder="Client name">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent" placeholder="Client name">
           </td>
           <td class="px-4 py-3">
             <input type="text" value="${estimate.tour_name || ''}" 
               onchange="updateEstimate(${estimate.id}, 'tour_name', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full" placeholder="Tour name">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-64 focus:ring-2 focus:ring-slate-400 focus:border-transparent" placeholder="Tour name">
           </td>
           <td class="px-4 py-3">
             <select onchange="updateEstimate(${estimate.id}, 'status', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full font-medium ${getStatusColor(estimate.status)}">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full font-medium focus:ring-2 focus:ring-slate-400 focus:border-transparent ${getStatusColor(estimate.status)}">
               ${statuses.map(s => `<option value="${s}" ${estimate.status === s ? 'selected' : ''}>${s}</option>`).join('')}
             </select>
           </td>
           <td class="px-4 py-3">
             <input type="date" value="${estimate.follow_up_date || ''}" 
               onchange="updateEstimate(${estimate.id}, 'follow_up_date', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent">
           </td>
           <td class="px-4 py-3">
             <select onchange="updateEstimate(${estimate.id}, 'reason', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full" ${estimate.status !== 'Lost' ? 'disabled' : ''}>
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent" ${estimate.status !== 'Lost' ? 'disabled' : ''}>
               <option value="">Select reason...</option>
               ${lostReasons.map(r => `<option value="${r}" ${estimate.reason === r ? 'selected' : ''}>${r}</option>`).join('')}
             </select>
@@ -384,11 +390,11 @@
           <td class="px-4 py-3">
             <input type="text" value="${estimate.note || ''}" 
               onchange="updateEstimate(${estimate.id}, 'note', this.value)"
-              class="border rounded-lg px-2 py-1 text-sm w-full" placeholder="Notes">
+              class="border border-slate-300 rounded-lg px-2 py-1 text-sm w-full focus:ring-2 focus:ring-slate-400 focus:border-transparent" placeholder="Notes">
           </td>
           <td class="px-4 py-3">
             <button onclick="deleteEstimate(${estimate.id})"
-              class="text-red-600 hover:text-red-800 hover:bg-red-50 p-2 rounded transition">
+              class="text-rose-600 hover:text-rose-800 hover:bg-rose-50 p-2 rounded-lg transition">
               <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </td>
@@ -400,10 +406,10 @@
 
     function getStatusColor(status) {
       switch(status) {
-        case 'Won': return 'bg-green-50 text-green-700';
-        case 'Lost': return 'bg-red-50 text-red-700';
-        case 'Under Review': return 'bg-yellow-50 text-yellow-700';
-        default: return 'bg-gray-50 text-gray-700';
+        case 'Won': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+        case 'Lost': return 'bg-rose-50 text-rose-700 border-rose-200';
+        case 'Under Review': return 'bg-amber-50 text-amber-700 border-amber-200';
+        default: return 'bg-slate-50 text-slate-700 border-slate-200';
       }
     }
 
@@ -415,23 +421,23 @@
       const winRate = total > 0 ? ((won / total) * 100).toFixed(1) : 0;
       
       document.getElementById('statsCards').innerHTML = `
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-4 rounded-lg shadow-md">
+        <div class="bg-gradient-to-br from-slate-700 to-slate-800 text-white p-4 rounded-xl shadow-lg border border-slate-600">
           <div class="text-sm opacity-90">Total Estimates</div>
           <div class="text-3xl font-bold">${total}</div>
         </div>
-        <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-4 rounded-lg shadow-md">
+        <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-4 rounded-xl shadow-lg">
           <div class="text-sm opacity-90">Won</div>
           <div class="text-3xl font-bold">${won}</div>
         </div>
-        <div class="bg-gradient-to-br from-red-500 to-red-600 text-white p-4 rounded-lg shadow-md">
+        <div class="bg-gradient-to-br from-rose-500 to-rose-600 text-white p-4 rounded-xl shadow-lg">
           <div class="text-sm opacity-90">Lost</div>
           <div class="text-3xl font-bold">${lost}</div>
         </div>
-        <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 text-white p-4 rounded-lg shadow-md">
+        <div class="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-4 rounded-xl shadow-lg">
           <div class="text-sm opacity-90">Pending</div>
           <div class="text-3xl font-bold">${pending}</div>
         </div>
-        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-4 rounded-lg shadow-md">
+        <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white p-4 rounded-xl shadow-lg">
           <div class="text-sm opacity-90">Win Rate</div>
           <div class="text-3xl font-bold">${winRate}%</div>
         </div>
@@ -443,10 +449,25 @@
     // ============================================
     
     function updateCharts() {
-      updateCountryChart();
-      updateStatusChart();
-      updateTrendChart();
-      lucide.createIcons();
+      try {
+        updateCountryChart();
+        updateStatusChart();
+        updateTrendChart();
+        lucide.createIcons();
+      } catch (error) {
+        console.error('Chart error:', error);
+        // Display simple statistics instead
+        document.getElementById('analyticsView').innerHTML = `
+          <div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-200 text-center">
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">📊 Analytics View</h3>
+            <p class="text-slate-600 mb-4">Chart rendering is temporarily unavailable.</p>
+            <p class="text-slate-500 text-sm">Please check the browser console for details.</p>
+            <button onclick="location.reload()" class="mt-4 bg-slate-800 text-white px-6 py-2 rounded-lg hover:bg-slate-900 transition">
+              Reload Page
+            </button>
+          </div>
+        `;
+      }
     }
 
     function updateCountryChart() {
@@ -455,11 +476,18 @@
         countryData[e.country] = (countryData[e.country] || 0) + 1;
       });
       
+      if (Object.keys(countryData).length === 0) {
+        return;
+      }
+      
       const data = {
         labels: Object.keys(countryData),
         datasets: [{
           data: Object.values(countryData),
-          backgroundColor: ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
+          backgroundColor: [
+            '#475569', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6',
+            '#06b6d4', '#ec4899', '#84cc16', '#f97316', '#6366f1', '#14b8a6'
+          ]
         }]
       };
       
@@ -467,8 +495,10 @@
         charts.country.destroy();
       }
       
-      const ctx = document.getElementById('countryChart').getContext('2d');
-      charts.country = new Chart(ctx, {
+      const ctx = document.getElementById('countryChart');
+      if (!ctx) return;
+      
+      charts.country = new Chart(ctx.getContext('2d'), {
         type: 'pie',
         data: data,
         options: {
@@ -489,6 +519,10 @@
         statusData[e.status] = (statusData[e.status] || 0) + 1;
       });
       
+      if (Object.keys(statusData).length === 0) {
+        return;
+      }
+      
       const data = {
         labels: Object.keys(statusData),
         datasets: [{
@@ -502,8 +536,10 @@
         charts.status.destroy();
       }
       
-      const ctx = document.getElementById('statusChart').getContext('2d');
-      charts.status = new Chart(ctx, {
+      const ctx = document.getElementById('statusChart');
+      if (!ctx) return;
+      
+      charts.status = new Chart(ctx.getContext('2d'), {
         type: 'bar',
         data: data,
         options: {
@@ -538,6 +574,10 @@
         if (e.status === 'Lost') monthlyData[month].lost++;
       });
       
+      if (Object.keys(monthlyData).length === 0) {
+        return;
+      }
+      
       const sortedMonths = Object.keys(monthlyData).sort();
       
       const data = {
@@ -546,8 +586,8 @@
           {
             label: 'Total',
             data: sortedMonths.map(m => monthlyData[m].total),
-            borderColor: '#3b82f6',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            borderColor: '#475569',
+            backgroundColor: 'rgba(71, 85, 105, 0.1)',
             tension: 0.4
           },
           {
@@ -571,8 +611,10 @@
         charts.trend.destroy();
       }
       
-      const ctx = document.getElementById('trendChart').getContext('2d');
-      charts.trend = new Chart(ctx, {
+      const ctx = document.getElementById('trendChart');
+      if (!ctx) return;
+      
+      charts.trend = new Chart(ctx.getContext('2d'), {
         type: 'line',
         data: data,
         options: {
@@ -632,8 +674,25 @@
       try {
         // Check if Supabase is configured
         if (SUPABASE_URL === 'YOUR_SUPABASE_PROJECT_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
-          alert('Please configure your Supabase credentials in the HTML file!');
+          document.getElementById('loading').innerHTML = `
+            <div class="text-center">
+              <p class="text-xl text-red-600 mb-4">⚠️ Configuration Required</p>
+              <p class="text-gray-700">Please configure your Supabase credentials in the HTML file.</p>
+            </div>
+          `;
           return;
+        }
+        
+        // Wait for Chart.js to load
+        if (typeof Chart === 'undefined') {
+          await new Promise(resolve => {
+            const checkChart = setInterval(() => {
+              if (typeof Chart !== 'undefined') {
+                clearInterval(checkChart);
+                resolve();
+              }
+            }, 100);
+          });
         }
         
         // Load data
@@ -647,7 +706,12 @@
         lucide.createIcons();
       } catch (error) {
         console.error('Initialization error:', error);
-        alert('Failed to initialize app: ' + error.message);
+        document.getElementById('loading').innerHTML = `
+          <div class="text-center">
+            <p class="text-xl text-red-600 mb-4">Error initializing app</p>
+            <p class="text-gray-700">${error.message}</p>
+          </div>
+        `;
       }
     }
 
